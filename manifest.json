@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Web to Markdown",
+  "version": "1.0.0",
+  "description": "Convert web pages to Markdown",
+
+  "action": {
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "content/inline.js",
+        "content/convertChildren.js",
+        "content/convertTextNode.js",
+        "content/table.js",
+        "content/code.js",
+        "content/content.js"
+      ]
+    }
+  ]
+}
