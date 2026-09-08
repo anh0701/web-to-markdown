@@ -17,6 +17,7 @@
         "content/convertTextNode.js",
         "content/table.js",
         "content/code.js",
+        "content/convertNode.js",
         "content/content.js"
       ]
     }
