@@ -1,38 +1,63 @@
-const convertButton =
-    document.getElementById("convert");
+const convertPageButton =
+    document.getElementById(
+        "convertPage"
+    );
 
-const result =
-    document.getElementById("result");
+
+const selectContentButton =
+    document.getElementById(
+        "selectContent"
+    );
 
 
-convertButton.addEventListener(
+const resultContainer =
+    document.getElementById(
+        "resultContainer"
+    );
+
+
+const resultTextarea =
+    document.getElementById(
+        "result"
+    );
+
+
+const copyButton =
+    document.getElementById(
+        "copy"
+    );
+
+async function getActiveTab() {
+
+    const tabs =
+        await chrome.tabs.query({
+            active: true,
+            currentWindow: true
+        });
+
+
+    return tabs[0];
+}
+
+convertPageButton.addEventListener(
     "click",
     async () => {
 
-        const tabs =
-            await chrome.tabs.query({
-                active: true,
-                currentWindow: true
-            });
-
-
         const tab =
-            tabs[0];
-
-
-        if (!tab || !tab.id) {
-            return;
-        }
+            await getActiveTab();
 
 
         chrome.tabs.sendMessage(
             tab.id,
             {
-                type: "GET_PAGE_CONTENT"
+                type:
+                    "GET_PAGE_CONTENT"
             },
-            (response) => {
+            response => {
 
-                if (chrome.runtime.lastError) {
+                if (
+                    chrome.runtime.lastError
+                ) {
 
                     console.error(
                         chrome.runtime.lastError.message
@@ -42,9 +67,76 @@ convertButton.addEventListener(
                 }
 
 
-                result.value =
+                if (!response) {
+                    return;
+                }
+
+
+                resultContainer.classList.remove(
+                    "hidden"
+                );
+
+
+                resultTextarea.value =
                     response.markdown;
             }
+        );
+    }
+);
+
+selectContentButton.addEventListener(
+    "click",
+    async () => {
+
+        const tab =
+            await getActiveTab();
+
+
+        chrome.tabs.sendMessage(
+            tab.id,
+            {
+                type:
+                    "START_SELECTION_MODE"
+            }
+        );
+
+
+        // Popup đóng để user
+        // quay lại trang web chọn nội dung
+        window.close();
+    }
+);
+
+copyButton.addEventListener(
+    "click",
+    async () => {
+
+        const markdown =
+            resultTextarea.value;
+
+
+        if (!markdown) {
+            return;
+        }
+
+
+        await navigator.clipboard.writeText(
+            markdown
+        );
+
+
+        copyButton.textContent =
+            "Copied!";
+
+
+        setTimeout(
+            () => {
+
+                copyButton.textContent =
+                    "Copy";
+
+            },
+            1500
         );
     }
 );

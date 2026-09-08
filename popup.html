@@ -1,29 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Web to Markdown</title>
+    <meta charset="UTF-8">
+
+    <title>Web to Markdown</title>
+
+    <link
+        rel="stylesheet"
+        href="popup.css"
+    >
 </head>
 
 <body>
 
-  <h1>Web to Markdown</h1>
+    <div class="popup">
 
-  <button id="convert">
-    Convert
-  </button>
+        <div class="header">
 
-  <br>
-  <br>
+            <div class="logo">
+                MD
+            </div>
 
-  <textarea
-    id="result"
-    rows="20"
-    cols="60"
-    placeholder="Markdown result..."
-  ></textarea>
+            <div>
 
-  <script src="popup.js"></script>
+                <h1>
+                    Web to Markdown
+                </h1>
+
+                <p>
+                    Convert web content to Markdown
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                id="convertPage"
+                class="action-button primary"
+            >
+
+                <span class="icon">
+                    📄
+                </span>
+
+                <span class="button-content">
+
+                    <strong>
+                        Convert Page
+                    </strong>
+
+                    <small>
+                        Convert the entire page
+                    </small>
+
+                </span>
+
+            </button>
+
+
+            <button
+                id="selectContent"
+                class="action-button"
+            >
+
+                <span class="icon">
+                    ✂️
+                </span>
+
+                <span class="button-content">
+
+                    <strong>
+                        Select Content
+                    </strong>
+
+                    <small>
+                        Select text on the page
+                    </small>
+
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="resultContainer"
+            class="result-container hidden"
+        >
+
+            <div class="result-header">
+
+                <span>
+                    Markdown Result
+                </span>
+
+                <button
+                    id="copy"
+                    class="copy-button"
+                >
+                    Copy
+                </button>
+
+            </div>
+
+
+            <textarea
+                id="result"
+                placeholder="Markdown result..."
+            ></textarea>
+
+        </div>
+
+    </div>
+
+
+    <script src="popup.js"></script>
 
 </body>
+
 </html>
