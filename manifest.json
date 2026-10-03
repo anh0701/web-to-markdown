@@ -12,6 +12,7 @@
     {
       "matches": ["<all_urls>"],
       "js": [
+        "content/modal.js",
         "content/inline.js",
         "content/convertChildren.js",
         "content/convertTextNode.js",
@@ -19,6 +20,17 @@
         "content/code.js",
         "content/convertNode.js",
         "content/content.js"
+      ]
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content/modal.css"
+      ],
+      "matches": [
+        "<all_urls>"
       ]
     }
   ]
